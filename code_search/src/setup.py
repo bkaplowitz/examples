@@ -44,13 +44,13 @@ class CustomCommands(SetupToolsCommand):
 
   @staticmethod
   def run_custom_command(command_list):
-    print('Running command: %s' % command_list)
+    print(f'Running command: {command_list}')
     p = subprocess.Popen(command_list, stdin=subprocess.PIPE,
                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     stdout_data, _ = p.communicate()
-    print('Command output: %s' % stdout_data)
+    print(f'Command output: {stdout_data}')
     if p.returncode != 0:
-      raise RuntimeError('Command %s failed: exit code: %s' % (command_list, p.returncode))
+      raise RuntimeError(f'Command {command_list} failed: exit code: {p.returncode}')
 
   def run(self):
     for command in CUSTOM_COMMANDS:

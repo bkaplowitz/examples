@@ -11,9 +11,7 @@ en = spacy.load('en')
 # In python2 we need to call decode but in python3 strings
 # are always unicode.
 def _maybe_decode(s):
-  if sys.version_info[0] < 3:
-    return s.decode("utf-8")
-  return s
+  return s.decode("utf-8") if sys.version_info[0] < 3 else s
 
 def tokenize_docstring(text):
   """Tokenize docstrings.

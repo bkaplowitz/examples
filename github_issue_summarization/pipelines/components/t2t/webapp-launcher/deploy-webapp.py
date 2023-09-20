@@ -41,7 +41,7 @@ def main():
 
   # KUBEFLOW_NAMESPACE = 'kubeflow'
 
-  print("using model name: %s and namespace: %s" % (args.model_name, args.namespace))
+  print(f"using model name: {args.model_name} and namespace: {args.namespace}")
 
   logging.getLogger().setLevel(logging.INFO)
   args_dict = vars(args)
@@ -53,9 +53,9 @@ def main():
     # Get cluster name and zone from metadata
     metadata_server = "http://metadata/computeMetadata/v1/instance/"
     metadata_flavor = {'Metadata-Flavor' : 'Google'}
-    cluster = requests.get(metadata_server + "attributes/cluster-name",
+    cluster = requests.get(f"{metadata_server}attributes/cluster-name",
                            headers=metadata_flavor).text
-    zone = requests.get(metadata_server + "zone",
+    zone = requests.get(f"{metadata_server}zone",
                         headers=metadata_flavor).text.split('/')[-1]
 
   # logging.info('Getting credentials for GKE cluster %s.' % cluster)
