@@ -22,10 +22,10 @@ def training_op(learning_rate: float,
 def postprocessing_op(output,
                       step_name='postprocessing'):
   return kfp.ContainerOp(
-    name=step_name,
-    image='library/bash:4.4.23',
-    command=['sh', '-c'],
-    arguments=['echo "%s"' % output]
+      name=step_name,
+      image='library/bash:4.4.23',
+      command=['sh', '-c'],
+      arguments=[f'echo "{output}"'],
   )
 
 @kfp.pipeline(
@@ -43,4 +43,4 @@ def kubeflow_training(
 
 if __name__ == '__main__':
   import kfp.compiler as compiler
-  compiler.Compiler().compile(kubeflow_training, __file__ + '.tar.gz')
+  compiler.Compiler().compile(kubeflow_training, f'{__file__}.tar.gz')
